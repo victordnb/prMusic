@@ -1,0 +1,54 @@
+<!--
+<hr/> -->
+<div class="col-lg-4" *ngIf="identity">
+
+	<h1>{{titulo}}</h1>
+
+	<!--formulario-->
+    
+    <div *ngIf="alertMessage">
+      <div class="alert alert-success" role="alert">
+        {{alertMessage}}
+      </div>
+    </div>
+    <form #userUpdateForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-7">
+      <p>
+        <label>Name</label>
+        <input type="text" #name="ngModel" name="name" [(ngModel)]="user.name" class="form-control" required />
+        <span *ngIf="!name.valid && name.touched">
+          <p style="color:#FF0000">Field Required!!</p>
+        </span>
+      </p>
+
+      <p>
+        <label>Surname</label>
+        <input type="text" #surname="ngModel" name="surname" [(ngModel)]="user.surname" class="form-control" required />
+        <span *ngIf="!surname.valid && surname.touched">
+          <p style="color:#FF0000">Field Required!!</p>
+        </span>
+      </p>
+
+      <p>
+        <label>Email</label>
+        <input type="email" #email="ngModel" name="email" [(ngModel)]="user.email" class="form-control" required />
+        <span *ngIf="!email.valid && email.touched">
+          <p style="color:#FF0000">Field Required!!</p>
+        </span>
+      </p>
+
+      <div class="image_for_edit" *ngIf="user.image && user.image != 'null'">
+        <img src="{{url + 'get-image-user/' + user.image}}" style="width: 150px;" />
+      </div>
+
+      <p>
+        <label>Upload your image:</label>
+        <input type="file" placeholder="Upload image..." (change)="fileChangeEvent($event)"/>
+      </p>
+
+      <input type="submit" value="update my datas" class="btn btn-primary" />
+
+    </form>	
+</div>
+
+
+
